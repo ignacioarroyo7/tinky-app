@@ -16,9 +16,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      {'Todos los derechos reservados © '}
+      <Link color="inherit" href="/">
+        Tinky
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -103,7 +103,7 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }}></Copyright>
       </Container>
     </ThemeProvider>
   );
