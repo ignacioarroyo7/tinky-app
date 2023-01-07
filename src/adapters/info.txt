@@ -1,0 +1,3 @@
+Los adapters reciben información externa, la adaptan y la devuelven
+Estos se relacionan con informacion externa, por si algo cambia
+solo debo modificar aqui y no en todas las partes de la aplicacion donde afecte

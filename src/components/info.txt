@@ -1,0 +1,2 @@
+En estas carpetas van los componentes que se usan en toda la aplicación.
+Por ejemplo, un input text modificado con estilos y validaciones que lo usare en cualquier parte donde necesite un input text

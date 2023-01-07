@@ -1,0 +1,3 @@
+Una carpeta reutilizable, puede ir dentro de cada vista tambien si es necesario
+Configuramos la estructura de nuestra app, configuramos el
+LayoutContainer, Heading, etc..

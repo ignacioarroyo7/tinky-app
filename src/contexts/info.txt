@@ -1,0 +1,5 @@
+Context, dentro de esta carpeta usamos toda
+
+Context usamos cuando necesitemos manejar el estado dentro de una page, de una vista, o que son simples y no vale la pena mantenerlas en redux
+
+La informacion del usuario vale la pena usarla en redux

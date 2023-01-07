@@ -1,0 +1,1 @@
+En la carpeta states se crean todas las entidadades que maneje en la aplicacion con redux
