@@ -13,10 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
+import { useNavigate } from "react-router-dom"
 
 const Navbar = () => {
+
+    const navigate = useNavigate();
+
     const pages = ['Products', 'Pricing', 'Blog'];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const settings = ['Logout'];
       const [anchorElNav, setAnchorElNav] = useState(null);
       const [anchorElUser, setAnchorElUser] = useState(null);
       const [userAuth,setUserAuth]= useState(false)
@@ -34,6 +38,11 @@ const Navbar = () => {
     
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+        setUserAuth(false)
+        console.log('Logout')
+        navigate('/login',{
+            replace:true
+        });
       };
       return (
         <AppBar position="static">
@@ -158,7 +167,7 @@ const Navbar = () => {
                 <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                     <Link href="/login">
                     <Button 
-                    onClick={()=>{console.log('toLogin')}}
+                    onClick={()=>{setUserAuth(true)}}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >Login
                   </Button>
