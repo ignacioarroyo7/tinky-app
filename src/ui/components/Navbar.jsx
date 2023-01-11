@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,16 +14,22 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from '../../auth/context/AuthContext';
+
+
 
 const Navbar = () => {
+
+  const {logged, logout} = useContext(AuthContext)
+
 
     const navigate = useNavigate();
 
     const pages = ['Products', 'Pricing', 'Blog'];
-    const settings = ['Logout'];
+    // const settings = ['Logout'];
       const [anchorElNav, setAnchorElNav] = useState(null);
       const [anchorElUser, setAnchorElUser] = useState(null);
-      const [userAuth,setUserAuth]= useState(false)
+      const [userAuth,setUserAuth]= useState(logged)
     
       const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -39,11 +45,16 @@ const Navbar = () => {
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
         setUserAuth(false)
-        console.log('Logout')
-        navigate('/login',{
-            replace:true
-        });
+        //console.log('Logout')
       };
+      const handleOnClickLogout = ()=>{
+        console.log('logouttttttt')
+        logout()
+        navigate('/',{
+          replace:true
+      });
+      }
+
       const handleOnClickLogin = ()=>{
         setUserAuth(true)
         navigate('/login',{
@@ -163,11 +174,14 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
+                  <MenuItem key={1} onClick={()=>handleOnClickLogout()}>
+                      <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                  {/* {settings.map((setting) => (s
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                      <Typography onClick={()=>} textAlign="center">{setting}</Typography>
                     </MenuItem>
-                  ))}
+                  ))} */}
                 </Menu>
               </Box>
               </>):(<>

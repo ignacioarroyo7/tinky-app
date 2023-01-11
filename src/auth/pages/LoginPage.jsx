@@ -34,8 +34,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 const LoginPage = ()=> {
-  const {login} = useContext(AuthContext)
+  const {login, logged} = useContext(AuthContext)
 
+  console.log(logged)
   // const { login } = useContext( AuthContext )
    const navigate = useNavigate();
 
