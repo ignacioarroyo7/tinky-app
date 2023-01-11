@@ -1,7 +1,7 @@
 import { Route,Routes } from "react-router-dom"
 
 import { AppRouter } from "../router/AppRouter"
-import LoginPage from "../auth/pages/LoginPage"
+import LoginPage from '../auth/pages/LoginPage'
 // import Navbar from "../ui/components/Navbar"
 
 
@@ -11,7 +11,7 @@ export const LogoutRouter = () =>{
         <>
         {/* <Navbar></Navbar> */}
     <Routes>
-        <Route path="/login" element={<LoginPage></LoginPage>}/>
+        <Route path="/login" element={<LoginPage/>}/>
         <Route path="/*" element={<AppRouter></AppRouter>}/>
         <Route/>
     </Routes>

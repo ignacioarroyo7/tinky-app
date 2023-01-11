@@ -1,4 +1,5 @@
 import * as React from 'react';
+import useContext from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from '../../../auth/context/AuthContext'
 
 
 function Copyright(props) {
@@ -30,22 +32,29 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 const Login =()=> {
+  const { login } = useContext( AuthContext )
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    //const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    //const name = data.get('email')
+    login('Nacho');
     navigate('/',{
       replace:true
     })
   };
   const handleOnClick = ()=>{
-    navigate('')
+    login('Nacho')
+    navigate('/',{
+      replace:true
+    })
   }
 
   return (
@@ -92,7 +101,7 @@ const Login =()=> {
               label="Recordarme"
             />
             <Button
-            onClick={handleOnClick()}
+            //onClick={handleOnClick()}
               type="submit"
               fullWidth
               variant="contained"
@@ -114,6 +123,14 @@ const Login =()=> {
             </Grid>
           </Box>
         </Box>
+        <Button
+            onClick={handleOnClick()}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Iasdasd
+            </Button>
         <Copyright sx={{ mt: 8, mb: 4 }}></Copyright>
       </Container>
     </ThemeProvider>

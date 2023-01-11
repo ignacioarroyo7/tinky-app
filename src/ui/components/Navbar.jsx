@@ -44,6 +44,13 @@ const Navbar = () => {
             replace:true
         });
       };
+      const handleOnClickLogin = ()=>{
+        setUserAuth(true)
+        navigate('/login',{
+          replace:true
+      });
+      }
+
       return (
         <AppBar position="static">
           <Container maxWidth="xl">
@@ -167,7 +174,7 @@ const Navbar = () => {
                 <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                     <Link href="/login">
                     <Button 
-                    onClick={()=>{setUserAuth(true)}}
+                    onClick={()=>{handleOnClickLogin()}}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >Login
                   </Button>

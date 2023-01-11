@@ -15,16 +15,17 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
       <LogoutRouter>
-        <AuthProvider>
           <div>
             <Login></Login>
             {/* <button type="button" onClick={()=>{dispatch(increment())}}>
           count is: {counter}
         </button> */}
           </div>
-        </AuthProvider>
+
       </LogoutRouter>
+      </AuthProvider>
     </>
   );
 }

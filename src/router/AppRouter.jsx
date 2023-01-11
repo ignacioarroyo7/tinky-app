@@ -1,5 +1,5 @@
 import { Navigate, Route,Routes } from "react-router-dom"
-import LoginPage from "../auth/pages/LoginPage"
+import LoginPage from '../auth/pages/LoginPage'
 import Dashboard from "../pages/Dashboard/components/Dashboard"
 import Home from "../pages/Home/HomePage"
  import Navbar from "../ui/components/Navbar"
