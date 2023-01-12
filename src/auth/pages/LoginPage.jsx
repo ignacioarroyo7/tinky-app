@@ -22,8 +22,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Tinky
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -55,7 +55,15 @@ const LoginPage = ()=> {
     })
   };
 
+  const toRegister = (event) => {
+    event.preventDefault();
+    navigate('/register',{
+      replace:true
+    })
+  };
+
   return (
+    <>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -113,7 +121,7 @@ const LoginPage = ()=> {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" onClick={toRegister} variant="body2">
                   {"No tienes una cuenta? Registrate"}
                 </Link>
               </Grid>
@@ -123,6 +131,8 @@ const LoginPage = ()=> {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    </>
+    
   );
 }
 export default LoginPage;

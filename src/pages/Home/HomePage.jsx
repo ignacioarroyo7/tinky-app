@@ -1,10 +1,13 @@
+import { Box } from '@mui/material';
 import React from 'react';
 
 const Home = () => {
     return (
-        <div>
-            <h1>Dashboard Page</h1>
-        </div>
+        <>
+        <Box>
+        <h1>Home Page</h1>
+        </Box>
+        </>
     );
 };
 
