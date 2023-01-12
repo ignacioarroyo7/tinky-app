@@ -13,6 +13,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+// import { useState } from "react";
+
 
 function Copyright(props) {
   return (
@@ -32,18 +35,70 @@ function Copyright(props) {
   );
 }
 
+
+
 const theme = createTheme();
 
 const RegisterCliente = () => {
   const navigate = useNavigate();
 
+  const baseURL = "https://8a14-181-94-58-51.ngrok.io/api/cliente/create";
+
+const singUpCliente =(data)=> {
+    axios
+    .post(baseURL, {
+      "name":data.nombre,
+"tel":data.telefono,
+"email":data.email,
+"estado":1,
+"google": 0,
+"foto": "",
+"password": data.password
+    })
+    .then((response) => {
+        if(response.status==200){
+            navigate("/login", {
+                replace: true,
+              })
+        }
+        console.log('response',response)
+        console.log('response data',response.data);
+    });
+  }
+
+//   const [nombre,setNombre]=useState('')
+//   const [apellido,setApellido]=useState('')
+//   const [email,setEmail]=useState('')
+//   const [telefono,setTelefono]=useState('')
+//   const [descripcion,setDescripcion]=useState('')
+//   const [password,setPassword]=useState('')
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const datos = {
+        nombre: data.get("nombre"),
+      apellido: data.get("apellido"),
       email: data.get("email"),
+      telefono: data.get("telefono"),
+      descripcion: data.get("descripcion"),
       password: data.get("password"),
-    });
+    }
+    // console.log({
+    //     nombre: data.get("nombre"),
+    //     apellido: data.get("apellido"),
+    //     email: data.get("email"),
+    //     telefono: data.get("telefono"),
+    //     password: data.get("password"),
+    //   });
+    singUpCliente(datos)
+    console.log('nuevo cliente',datos)
+//     setNombre('')
+//     setApellido('')
+//     setEmail('')
+//     setTelefono('')
+//     setPassword('')
+//     setDescripcion('')
   };
 
   return (
@@ -74,12 +129,14 @@ const RegisterCliente = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="Nombre"
+                  name="nombre"
                   required
                   fullWidth
                   id="nombreRegister"
                   label="Nombre"
                   autoFocus
+                  //value={nombre}
+
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -90,6 +147,8 @@ const RegisterCliente = () => {
                   label="Apellido"
                   name="apellido"
                   autoComplete="family-name"
+                  //value={apellido}
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,8 +157,10 @@ const RegisterCliente = () => {
                   fullWidth
                   id="emailRegister"
                   label="Correo electrónico"
-                  name="Correo electrónico"
+                  name="email"
                   autoComplete="email"
+                  //value={email}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -118,6 +179,8 @@ const RegisterCliente = () => {
                   name="telefono"
                   autoComplete="family-name"
                   type="number"
+                  //value={telefono}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -129,6 +192,8 @@ const RegisterCliente = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  //value={password}
+
                 />
               </Grid>
               {/* <Grid item xs={12}>

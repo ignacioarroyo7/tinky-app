@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+// import { useState } from "react";
 
 // import PhoneInput from 'react-phone-input-2'
 // import {useState} from 'react';
@@ -35,19 +37,72 @@ function Copyright(props) {
   );
 }
 
+
 const theme = createTheme();
 
 const RegisterEmbajador = () => {
   // const [valuePhone,setValuePhone] = useState('')
   const navigate = useNavigate();
+  const baseURL = "https://8a14-181-94-58-51.ngrok.io/api/embajador/create";
+    //const [nombre,setNombre]=useState('')
+    // const [apellido,setApellido]=useState('')
+    // const [email,setEmail]=useState('')
+    // const [telefono,setTelefono]=useState('')
+    // const [descripcion,setDescripcion]=useState('')
+    // const [password,setPassword]=useState('')
+    
+    const singUpEmbajador =(data)=> {
+        axios
+          .post(baseURL, {
+            "name":data.nombre,
+    "tel":data.telefono,
+    "email":data.email,
+    "resumen":data.descripcion,
+    "cv": "",
+    "estado":1,
+    "google": 0,
+    "foto": "",
+    "password": data.password
+          })
+          .then((response) => {
+            if(response.status==200){
+                navigate("/login", {
+                    replace: true,
+                  })
+            }
+            console.log('response',response)
+            console.log('response data',response.data);
+          });
+      }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const datos = {
+        nombre: data.get("nombre"),
+      apellido: data.get("apellido"),
       email: data.get("email"),
+      telefono: data.get("telefono"),
+      descripcion: data.get("descripcion"),
       password: data.get("password"),
-    });
+    }
+    //setNombre(data.get("nombre"))
+    // console.log({
+    //   nombre: data.get("nombre"),
+    //   apellido: data.get("apellido"),
+    //   email: data.get("email"),
+    //   telefono: data.get("telefono"),
+    //   descripcion: data.get("descripcion"),
+    //   password: data.get("password"),
+    // });
+    console.log('nuevo cliente',datos)
+    //setNombre('')
+    // setApellido('')
+    // setEmail('')
+    // setTelefono('')
+    // setPassword('')
+    // setDescripcion('')
+    singUpEmbajador(datos)
   };
 
   return (
@@ -78,12 +133,13 @@ const RegisterEmbajador = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="Nombre"
+                  name="nombre"
                   required
                   fullWidth
                   id="nombreRegister"
                   label="Nombre"
                   autoFocus
+                  //value={nombre}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -94,6 +150,7 @@ const RegisterEmbajador = () => {
                   label="Apellido"
                   name="apellido"
                   autoComplete="family-name"
+                  //value={apellido}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -102,8 +159,9 @@ const RegisterEmbajador = () => {
                   fullWidth
                   id="emailRegister"
                   label="Correo electrónico"
-                  name="Correo electrónico"
+                  name="email"
                   autoComplete="email"
+                  //value={email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,6 +180,19 @@ const RegisterEmbajador = () => {
                   name="telefono"
                   autoComplete="family-name"
                   type="number"
+                  //value={telefono}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Contraseña"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  //value={password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -135,17 +206,8 @@ const RegisterEmbajador = () => {
                   label="Descripción del servicio"
                   name="descripcion"
                   autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  //value={descripcion}
+
                 />
               </Grid>
               {/* <Grid item xs={12}>

@@ -46,6 +46,36 @@ export const AuthProvider = ({ children}) =>{
         
         dispatch(action)
     }
+
+    // const registerCliente = (name= '')=>{
+
+    //     const user = {
+    //         id:'ABC',
+    //     name: name
+    //     }
+
+    //     const action = {
+    //         type: types.login,
+    //         payload: user
+    //     }
+    //     localStorage.setItem('user',JSON.stringify(user));
+    //     dispatch(action)
+    // }
+
+    // const registerEmbajador = (name= '')=>{
+
+    //     const user = {
+    //         id:'ABC',
+    //     name: name
+    //     }
+
+    //     const action = {
+    //         type: types.login,
+    //         payload: user
+    //     }
+    //     localStorage.setItem('user',JSON.stringify(user));
+    //     dispatch(action)
+    // }
     
     return(
         <AuthContext.Provider value={{
@@ -53,6 +83,9 @@ export const AuthProvider = ({ children}) =>{
             //Methods
             login,
             logout,
+            // registerCliente,
+            // registerEmbajador,
+            
         }}>
             {children}
         </AuthContext.Provider>

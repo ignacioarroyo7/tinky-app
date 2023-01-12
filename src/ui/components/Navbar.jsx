@@ -25,7 +25,7 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const pages = ['Products', 'Pricing', 'Blog'];
+    const pages = ['Servicios',];
     // const settings = ['Logout'];
       const [anchorElNav, setAnchorElNav] = useState(null);
       const [anchorElUser, setAnchorElUser] = useState(null);
