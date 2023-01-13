@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useState } from "react";
@@ -35,10 +34,6 @@ function Copyright(props) {
   );
 }
 
-
-
-const theme = createTheme();
-
 const RegisterCliente = () => {
   const navigate = useNavigate();
 
@@ -56,7 +51,7 @@ const singUpCliente =(data)=> {
 "password": data.password
     })
     .then((response) => {
-        if(response.status==200){
+        if(response.status===200){
             navigate("/login", {
                 replace: true,
               })
@@ -102,7 +97,6 @@ const singUpCliente =(data)=> {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -230,7 +224,6 @@ const singUpCliente =(data)=> {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
   );
 };
 export default RegisterCliente;

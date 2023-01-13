@@ -16,9 +16,8 @@ import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../auth/context/AuthContext';
 
-
-
 const Navbar = () => {
+
 
   const {logged, logout} = useContext(AuthContext)
 
@@ -26,7 +25,6 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const pages = ['Servicios',];
-    // const settings = ['Logout'];
       const [anchorElNav, setAnchorElNav] = useState(null);
       const [anchorElUser, setAnchorElUser] = useState(null);
       const [userAuth,setUserAuth]= useState(logged)
@@ -63,6 +61,7 @@ const Navbar = () => {
       }
 
       return (
+        <>
         <AppBar position="static">
           <Container maxWidth="xl">
             <Toolbar disableGutters>
@@ -199,6 +198,8 @@ const Navbar = () => {
             </Toolbar>
           </Container>
         </AppBar>
+        </>
+        
       );
 };
 

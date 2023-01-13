@@ -38,7 +38,23 @@ function Copyright(props) {
 }
 
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+      type: 'light',
+      primary: {
+        main: '#e86b28',
+      },
+      secondary: {
+        main: '#fdbc22',
+      },
+      warning: {
+        main: '#ffea00',
+      },
+      background: {
+        default: '#e7e8ea',
+      },
+    },
+});
 
 const LoginPage = () => {
   const { login, logged } = useContext(AuthContext);
@@ -56,7 +72,7 @@ const LoginPage = () => {
         "password": data.password,
       })
       .then((response) => {
-        if(response.status==200){
+        if(response.status===200){
     login(data.email);
           navigate("/", {
               replace: true,
