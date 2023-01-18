@@ -25,7 +25,7 @@ const Articulo = (props)=> {
               {post.description}
             </Typography>
             <Typography variant="subtitle1" color="primary">
-              Continue reading...
+              Ver en detalle...
             </Typography>
           </CardContent>
           <CardMedia

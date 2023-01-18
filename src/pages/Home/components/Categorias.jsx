@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 // import Button from '@mui/material/Button';
@@ -6,6 +6,18 @@ import Toolbar from '@mui/material/Toolbar';
 // import SearchIcon from '@mui/icons-material/Search';
 // import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+// import { FitnessCenterIcon, PsychologyIcon, FlagIcon, AutoStoriesIcon  } from '@mui/icons-material';
+import { FitnessCenterIcon } from '@mui/icons-material';
+import { Box } from '@mui/system';
+import { flexbox } from '@mui/system';
+import { Card, CardActionArea, CardContent } from '@mui/material';
+
+
+// import { ListIcon  } from '@mui/icons-material/List';
+
+
+
 
 const Categorias = (props) => {
     const { sections, title } = props;
@@ -33,19 +45,41 @@ const Categorias = (props) => {
       <Toolbar
         component="nav"
         variant="dense"
-        sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
+        sx={{ my:4, justifyContent: 'space-between', overflowX: 'auto' }}
       >
-        {sections.map((section) => (
+        {sections.map((section,i) => (
+          <>
+      <CardActionArea component="a" href="#">
+      <Card sx={{ display: 'flex' }}>
+      <CardContent sx={{ flex: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Box>
+          <Typography component="h6" variant="h6">
+          Icon
+      </Typography>
+          </Box>
+          <Box>
+          <Typography component="h2" variant="h5">
           <Link
+          style={{ textDecoration: 'none' }}
             color="inherit"
             noWrap
             key={section.title}
-            variant="body2"
+            //variant="body2"
             href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
+            sx={{ p: 1, flexShrink: 0}}
           >
             {section.title}
           </Link>
+      </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+      </Card>
+      </CardActionArea>
+        
+          
+          </>
         ))}
       </Toolbar>
         </>
