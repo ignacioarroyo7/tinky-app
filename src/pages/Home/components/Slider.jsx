@@ -17,14 +17,16 @@ const Slider = (props) => {
         backgroundColor: 'grey.800',
         color: '#fff',
         mb: 4,
+        mt:0,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: `url(${post.image})`,
+        height: '250px'
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none',maxWidth: '100%', height: '200px' }} src={post.image} alt={post.imageText} />}
       <Box
         sx={{
           position: 'absolute',
@@ -39,7 +41,7 @@ const Slider = (props) => {
         <Grid item md={6}>
           <Box
             sx={{
-              position: 'relative',
+              //position: 'relative',
               p: { xs: 3, md: 6 },
               pr: { md: 0 },
             }}

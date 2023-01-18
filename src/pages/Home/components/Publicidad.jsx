@@ -20,10 +20,11 @@ const Publicidad = (props)=> {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: `url(${post.image})`,
+        height: '150px',
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none', resizeMode: 'cover', }} src={post.image} alt={post.imageText} />}
       <Box
         sx={{
           position: 'absolute',
