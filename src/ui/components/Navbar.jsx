@@ -24,7 +24,6 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const pages = ['Servicios',];
       const [anchorElNav, setAnchorElNav] = useState(null);
       const [anchorElUser, setAnchorElUser] = useState(null);
       const [userAuth,setUserAuth]= useState(logged)
@@ -39,7 +38,21 @@ const Navbar = () => {
       const handleCloseNavMenu = () => {
         setAnchorElNav(null);
       };
-    
+      const handleOnClickServicios = () => {
+        setAnchorElNav(null);
+        navigate('/search',{
+          replace:true
+      });
+      };
+      
+      // const handleOnClickPerfil = ()=>{
+      //   console.log('in perfil')
+      //   logout()
+      //   navigate('/perfil',{
+      //     replace:true
+      // });
+      // }
+
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
         setUserAuth(false)
@@ -52,6 +65,7 @@ const Navbar = () => {
           replace:true
       });
       }
+
 
       const handleOnClickLogin = ()=>{
         setUserAuth(true)
@@ -113,11 +127,17 @@ const Navbar = () => {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  {pages.map((page) => (
+                  {/* {pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
-                  ))}
+                  ))} */}
+                  <MenuItem key={1} onClick={handleOnClickServicios}>
+                      <Typography textAlign="center">Servicios</Typography>
+                    </MenuItem>
+                    {/* <MenuItem key={1} onClick={handleOnClickPerfil}>
+                      <Typography textAlign="center">Mi Perfil</Typography>
+                    </MenuItem> */}
                 </Menu>
               </Box>
               <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -140,7 +160,7 @@ const Navbar = () => {
                 LOGO
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
+                {/* {pages.map((page) => (
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
@@ -148,7 +168,21 @@ const Navbar = () => {
                   >
                     {page}
                   </Button>
-                ))}
+                ))} */}
+                <Button
+                    key={1}
+                    onClick={handleOnClickServicios}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    Servicios
+                  </Button>
+                  {/* <Button
+                    key={2}
+                    onClick={handleOnClickPerfil}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    Perfil
+                  </Button> */}
               </Box>
               {userAuth?(<>
                 <Box sx={{ flexGrow: 0 }}>
@@ -173,6 +207,9 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
+                  {/* <MenuItem key={1} onClick={()=>handleOnClickPerfil()}>
+                      <Typography textAlign="center">Perfil</Typography>
+                  </MenuItem> */}
                   <MenuItem key={1} onClick={()=>handleOnClickLogout()}>
                       <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
