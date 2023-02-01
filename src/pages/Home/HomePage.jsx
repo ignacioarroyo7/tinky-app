@@ -9,13 +9,6 @@ import Slider from './components/Slider';
 
 const Home = () => {
 
-    const sections = [
-        { title: 'Fitness', url: '#' },
-        { title: 'Psícologo', url: '#' },
-        { title: 'Idioma', url: '#' },
-        { title: 'Academíco', url: '#' },
-        { title: 'Otros', url: '#' },
-      ];
       
       const publicidad = {
         title: '',
@@ -107,12 +100,12 @@ const Home = () => {
         <CssBaseline />
       <Container maxWidth="lg">
       <Slider post={slider} />
-        <Categorias title="Blog" sections={sections} />
+        <Categorias title="Blog"/>
         <main>
           <Publicidad post={publicidad} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <Articulo key={post.title} post={post} />
+            {featuredPosts.map((post,i) => (
+              <Articulo key={i} post={post} />
             ))}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
