@@ -117,6 +117,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const onSubmit = e => {
+  e.preventDefault();
+  console.log("search with ",palabraBusqueda)
+  setPalabraBusqueda('')
+  navigate('/search',{
+    replace:true
+});
+};
+
+
+const [palabraBusqueda,setPalabraBusqueda] = useState('')
+
       return (
         <>
         <AppBar position="static">
@@ -228,15 +240,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                     Perfil
                   </Button> */}
               </Box>
+            {/* <form onSubmit={(e)=>onSubmit(e)}> */}
               <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            <form onSubmit={(e)=>onSubmit(e)}>
             <StyledInputBase
               placeholder="Buscar..."
               inputProps={{ 'aria-label': 'search' }}
+              onChange={e=>setPalabraBusqueda(e.target.value)}
+              value={palabraBusqueda}
+              autoFocus
             />
+
+            </form>
           </Search>
+
+            {/* </form> */}
               {userAuth?(<>
                 <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
