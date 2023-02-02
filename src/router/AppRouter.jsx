@@ -5,6 +5,8 @@ import Home from "../pages/Home/HomePage"
  import Navbar from "../ui/components/Navbar"
 import BusquedaPage from "../pages/Busqueda/BusquedaPage"
 import Perfil from "../pages/Perfil/Perfil"
+import SolicitarTurno from "../pages/Turno/SolicitarTurno"
+import CrearTurno from "../pages/Turno/CrearTurno"
 
 
 export const AppRouter = () =>{
@@ -20,6 +22,8 @@ export const AppRouter = () =>{
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/search" element={<BusquedaPage/>} />
         <Route path="/perfil" element={<Perfil/>}/>
+        <Route path= "/solicitar-turno" element={<SolicitarTurno/>}/>
+        <Route path= "/crear-turno" element={<CrearTurno/>}/>
         <Route path="/" element={<Navigate to="/"/>}/>
         <Route/>
     </Routes>
