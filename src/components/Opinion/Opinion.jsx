@@ -10,13 +10,13 @@ const Opinion = (props) => {
     const {nombre, comentario, puntaje} = props
 
     return (
-        <Container maxWidth="sm" sx={{borderRadius:0.5,borderBottom: '1px solid #999999'}}>
+        <Container maxWidth="sm" sx={{display:'inline-block',alignItems:'center', justifyContent: 'center', borderRadius:0.5,borderBottom: '1px solid #999999'}}>
             
-            <Typography>
+            <Typography display="block" gutterBottom>
                 {nombre}
             </Typography>
             <Rating name="rating-read-only" value={puntaje} readOnly />
-            <Typography>
+            <Typography variant='caption' display='block' gutterBottom>
                 {comentario}
             </Typography>
       </Container>
