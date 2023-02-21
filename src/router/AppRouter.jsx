@@ -7,6 +7,7 @@ import BusquedaPage from "../pages/Busqueda/BusquedaPage"
 import Perfil from "../pages/Perfil/Perfil"
 import SolicitarTurno from "../pages/Turno/SolicitarTurno"
 import CrearTurno from "../pages/Turno/CrearTurno"
+import DetalleOferta from "../pages/DetalleOferta/DetalleOferta"
 
 
 export const AppRouter = () =>{
@@ -24,6 +25,7 @@ export const AppRouter = () =>{
         <Route path="/perfil" element={<Perfil/>}/>
         <Route path= "/solicitar-turno" element={<SolicitarTurno/>}/>
         <Route path= "/crear-turno" element={<CrearTurno/>}/>
+        <Route path= "/detalle-oferta" element={<DetalleOferta/>}/>
         <Route path="/" element={<Navigate to="/"/>}/>
         <Route/>
     </Routes>

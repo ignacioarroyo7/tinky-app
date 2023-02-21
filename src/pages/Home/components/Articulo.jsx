@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 const Articulo = (props)=> {
   const navigate = useNavigate();
   const handleOnClickPerfil = ()=>{
-    navigate('/perfil',{
+    navigate('/detalle-oferta',{
       replace:true
   });
   }
