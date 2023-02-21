@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 
+const theme = createTheme();
 
 const RegisterPage = () => {
     const [value, setValue] = useState('1');
@@ -19,7 +20,6 @@ const RegisterPage = () => {
     setValue(newValue);
   };
 
-const theme = createTheme();
 
     return (
         <>

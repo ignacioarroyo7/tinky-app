@@ -1,4 +1,5 @@
 import { Container } from "@mui/material";
+import HorarioRow from "./components/HorarioRow";
 
 
 
@@ -7,9 +8,12 @@ const Horarios = () => {
     
 
     return(
-        <Container>
-            <></>
+        <>
+        <Container sx={{width:'80vw'}}>
+            <HorarioRow>
+            </HorarioRow>
         </Container>
+            </>
     )
 }
 

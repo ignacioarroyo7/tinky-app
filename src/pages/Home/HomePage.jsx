@@ -6,8 +6,13 @@ import Categorias from './components/Categorias';
 import Publicidad from './components/Publicidad';
 import Articulo from './components/Articulo';
 import Slider from './components/Slider';
+import { Button } from '@mui/material';
+import { useNavigate } from "react-router-dom"
+
 
 const Home = () => {
+
+  const navigate = useNavigate();
 
       
       const publicidad = {
@@ -94,6 +99,18 @@ const Home = () => {
             imageLabel: 'Image Text',
           },
       ];
+
+      const handleOnClickSolicitarTurno = ()=>{
+        navigate('/solicitar-turno',{
+          replace:true
+      });
+      }
+
+      const handleOnClickCrearTurno = ()=>{
+        navigate('/crear-turno',{
+          replace:true
+      });
+      }
       
     return (
         <>
@@ -111,6 +128,9 @@ const Home = () => {
           <Grid container spacing={5} sx={{ mt: 3 }}>
           </Grid>
         </main>
+        <Button onClick={()=>handleOnClickCrearTurno()}> Crear turno </Button>
+        <Button onClick={()=>handleOnClickSolicitarTurno()}> Solicitar turno </Button>
+
       </Container>
         </>
     );
