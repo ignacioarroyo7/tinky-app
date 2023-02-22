@@ -1,107 +1,137 @@
-import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import Toolbar from '@mui/material/Toolbar';
-import { Grid } from '@mui/material';
-import { Box } from '@mui/system';
+import React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import { Button, Grid, Link} from "@mui/material";
+import { Box } from "@mui/system";
+import Rating from '@mui/material/Rating';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import { useNavigate } from "react-router-dom"
 
-const opiniones = [
-  {nombre:'Ignacio Arroyo', puntaje: 4, comentario: 'Excelente Profesional'},
-  {nombre:'Juan Pablo Soria', puntaje: 5, comentario: 'Sin comentarios muy buen servicio'},
-  {nombre:'Omar Rivas', puntaje: 2, comentario: 'Llega tarde a las reuniones'},
-]
 
 
 const DetalleOferta = () => {
-
-    return (
-        <>
-        <CssBaseline />
+  const navigate = useNavigate();
+  const handleOnClickPerfil = ()=>{
+    navigate('/perfil',{
+      replace:true
+  });}
+  return (
+    <>
+      <CssBaseline />
       <Container maxWidth="lg">
-      
-        <Card>
-        <Grid container padding={4}>
-          <Grid item xs={8}>
-          <Stack direction="row" spacing={2} sx={{ my: 4 }}>
-      <Typography component="h2" variant="h5">
-      María Soler / Psícologa Profesional
+        <Card marginBottom={0}>
+          <Grid container padding={4}>
+            <Grid item xs={8} sx={{ m:0, border: 1, borderColor: "#e0ebeb", borderTopLeftRadius:20, borderBottomLeftRadius:20 }}>
+              <Box textAlign={"center"} spacing={2} paddingY={5} paddingX={3}>
+              <Typography marginBottom={4}  display={"block"} width={"100%"} component="h4" variant="h4">
+                  Orientación vocacional - Sesión
+                </Typography>
+                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
+                ¿No estás seguro o segura qué carrera te conviene más? ¿Tienes demasiadas o ninguna opción de carrera?
+                </Typography>
+                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
+               Vamos a trabajar en conjunto para que puedas descrubir tu vocación y elegir tu carrera
+                </Typography>
+                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
+               Lo haremos mediante la orientación vocacional, que es un proceso de aprendizaje que implica autoconocernos e identificar nuestros objetivos de vida. Esto nos permite identificar aquellas carreras que se adaptan mejor a nuestra forma de ser.
+                </Typography>
+                <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ mt:5 }}>
+            <Rating name="rating-read-only" value={4} readOnly />
             </Typography>
-      </Stack>    
-        <Stack direction="row"
-         spacing={2}>
-      <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 200, height: 200 }}
-      />
-    </Stack>
-          </Grid>
-          <Grid item xs={4}>
-          <Stack direction="row" spacing={2} sx={{ my: 4 }}>
-      <Typography component="h2" variant="h5">
-      María Soler / Psícologa Profesional
+            <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ my:2 }}>
+              (2100 opiniones)
             </Typography>
-      </Stack>    
+            <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ mb:2 }}>
+              ESP / ING
+            </Typography>
+            <Button sx={{py:2,px:5}} size="large" variant="contained" endIcon={<EventAvailableIcon/>}>
+              Reservar turno
+            </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={4} sx={{ borderRight:1,borderTop:1,borderBottom:1, borderColor: "#e0ebeb", borderTopRightRadius:20 , borderBottomRightRadius:20}}>
+              <Box textAlign={"center"} spacing={2} paddingY={5}>
+                <Typography marginBottom={5}  display={"block"} width={"100%"} component="h2" variant="h5">
+                  María Soler
+                </Typography>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/static/images/avatar/1.jpg"
+                  sx={{ width: 200, height: 200, mx:"auto", my:"5"}}
+                  my={5}
+                />     
+                <Typography marginY={5} display={"block"} width={"100%"} component="h2" variant="h5">
+                  Psícologa Profesional
+                </Typography>
+                <Link href="#" onClick={handleOnClickPerfil} sx={{my:5, fontSize:20}}>
+                Ver perfil en detalle...
+                </Link>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-    <Stack direction="row" justifyContent="center" spacing={2} sx={{ my: 4 }}>
-
-<Box sx={{border:1, borderColor:'#e0ebeb', borderRadius:5}} padding={5} margin={3} width={'100%'} direction="row" justifyContent="center">
-<Typography marginBottom={5} marginLeft={5} variant='h5'>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            spacing={2}
+            sx={{ mb: 4 }}
+          >
+            <Box
+              sx={{ border: 1, borderColor: "#e0ebeb", borderRadius: 5 }}
+              padding={5}
+              margin={3}
+              width={"100%"}
+              direction="row"
+              justifyContent="center"
+            >
+              <Typography marginBottom={5} marginLeft={5} variant="h5">
                 Otras publicaciones del mismo profesional
               </Typography>
-      <Grid direction="row" justifyContent="center" container width={'100%'}>
-        <Grid item xs={3} sx={{mx:2}}>
-        <CardActionArea>
-            <Card>
-            <CardContent>
-              <Typography>
-                Otra publicacion
-              </Typography>
-
-            </CardContent>
-            </Card>
-        </CardActionArea>
-        </Grid>
-        <Grid item xs={3} sx={{mx:2}}>
-        <CardActionArea>
-            <Card>
-            <CardContent>
-              <Typography>
-                Otra publicacion
-              </Typography>
-
-            </CardContent>
-            </Card>
-        </CardActionArea>
-        </Grid>
-        <Grid item xs={3} sx={{mx:2}}>
-        <CardActionArea>
-            <Card>
-            <CardContent>
-              <Typography>
-                Otra publicacion
-              </Typography>
-
-            </CardContent>
-            </Card>
-        </CardActionArea>
-        </Grid>
-      </Grid>
-</Box>
-
-            </Stack>           
+              <Grid
+                direction="row"
+                justifyContent="center"
+                container
+                width={"100%"}
+              >
+                <Grid item xs={3} sx={{ mx: 2 }}>
+                  <CardActionArea sx={{width:"220px", height:"240px"}}>
+                    <Card  sx={{width:"220px", height:"240px"}}>
+                      <CardContent>
+                        <Typography>Otra publicacion</Typography>
+                      </CardContent>
+                    </Card>
+                  </CardActionArea>
+                </Grid>
+                <Grid item xs={3} sx={{ mx: 2 }}>
+                  <CardActionArea sx={{width:"220px", height:"240px"}}>
+                    <Card sx={{width:"220px", height:"240px"}}>
+                      <CardContent>
+                        <Typography>Otra publicacion</Typography>
+                      </CardContent>
+                    </Card>
+                  </CardActionArea>
+                </Grid>
+                <Grid item xs={3} sx={{ mx: 2 }}>
+                  <CardActionArea sx={{width:"220px", height:"240px"}}>
+                    <Card sx={{width:"220px", height:"240px"}}>
+                      <CardContent>
+                        <Typography>Otra publicacion</Typography>
+                      </CardContent>
+                    </Card>
+                  </CardActionArea>
+                </Grid>
+              </Grid>
+            </Box>
+          </Stack>
         </Card>
-     
       </Container>
-        </>
-    );
+    </>
+  );
 };
 
 export default DetalleOferta;

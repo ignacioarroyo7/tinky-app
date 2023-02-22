@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 
 const Articulo = (props)=> {
   const navigate = useNavigate();
-  const handleOnClickPerfil = ()=>{
+  const handleOnClickDetalleOferta = ()=>{
     navigate('/detalle-oferta',{
       replace:true
   });
@@ -19,7 +19,7 @@ const Articulo = (props)=> {
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#" onClick={handleOnClickPerfil}>
+      <CardActionArea component="a" href="#" onClick={handleOnClickDetalleOferta}>
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
