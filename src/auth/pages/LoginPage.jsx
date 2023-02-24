@@ -17,6 +17,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import { enviroment } from "../../enviroment";
+import { useEffect } from "react";
+import { useState } from "react";
 // import { AuthContext } from '../context/AuthContext'
 
 function Copyright(props) {
@@ -57,19 +60,28 @@ const theme = createTheme({
 });
 
 const LoginPage = () => {
+  // const [urlBaseBack,setUrlBaseBack] = useState(enviroment.urlBaseBack)
   const { login, logged } = useContext(AuthContext);
+
+
+  // useEffect(()=>{
+  //     console.log(urlBaseBack+"/api/auth/login")
+  // },[])
+
 
   console.log(logged);
   // const { login } = useContext( AuthContext )
   const navigate = useNavigate();
 
-  const baseURL = "https://8a14-181-94-58-51.ngrok.io/api/auth/login";
+  const baseURL = `${enviroment.urlBaseBack}/api/auth/login`;
+
 
   const iniciarSesion = (data) => {
     axios
       .post(baseURL, {
         "email": data.email,
         "password": data.password,
+        "isCliente": true
       })
       .then((response) => {
         if(response.status===200){

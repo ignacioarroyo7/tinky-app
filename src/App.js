@@ -7,6 +7,13 @@ import { AuthProvider } from "./auth/context";
 // import { AppRouter } from "./router/AppRouter";
 import { LogoutRouter } from "./routes/LogoutRouter";
 import {ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 
 
 const theme = createTheme({
@@ -27,6 +34,8 @@ const theme = createTheme({
     },
 });
 
+const queryClient = new QueryClient()
+
 function App() {
  // const { counter } = useSelector((state) => state.counter);
   //const dispatch = useDispatch();
@@ -34,16 +43,15 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <LogoutRouter>
           <div>
             <Login></Login>
-            {/* <button type="button" onClick={()=>{dispatch(increment())}}>
-          count is: {counter}
-        </button> */}
           </div>
       </LogoutRouter>
       </AuthProvider>
+      </QueryClientProvider>
           </ThemeProvider>
     </>
   );

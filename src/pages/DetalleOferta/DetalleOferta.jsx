@@ -7,70 +7,195 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
-import { Button, Grid, Link} from "@mui/material";
+import { Button, Grid, Link } from "@mui/material";
 import { Box } from "@mui/system";
-import Rating from '@mui/material/Rating';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import { useNavigate } from "react-router-dom"
+import Rating from "@mui/material/Rating";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import { useLocation, useNavigate } from "react-router-dom";
+import { enviroment } from "../../enviroment";
+import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
 
-
+const useOfertaById = (ofertaId) => {
+  return useQuery("oferta", async () => {
+    const { data } = await axios.get(`${enviroment.urlBaseBack}/oferta`, {
+      params: { ofertaId },
+    });
+    return data;
+  });
+};
 
 const DetalleOferta = () => {
+  const { state } = useLocation();
+  const { ofertaId } = state;
+  const queryClient = useQueryClient();
+  const { status, data, error, isFetching } = useOfertaById(ofertaId);
+
   const navigate = useNavigate();
-  const handleOnClickPerfil = ()=>{
-    navigate('/perfil',{
-      replace:true
-  });}
+  const handleOnClickPerfil = () => {
+    navigate("/perfil", {
+      replace: true,
+    });
+  };
+
+  const oferta = data.oferta
+  const idiomas = data.idiomas
+  const opiniones = data.opiniones
+
   return (
-    <>
+<>
       <CssBaseline />
       <Container maxWidth="lg">
+        {isFetching?<></>:<>
         <Card marginBottom={0}>
           <Grid container padding={4}>
-            <Grid item xs={8} sx={{ m:0, border: 1, borderColor: "#e0ebeb", borderTopLeftRadius:20, borderBottomLeftRadius:20 }}>
+            <Grid
+              item
+              xs={8}
+              sx={{
+                m: 0,
+                border: 1,
+                borderColor: "#e0ebeb",
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 20,
+              }}
+            >
               <Box textAlign={"center"} spacing={2} paddingY={5} paddingX={3}>
-              <Typography marginBottom={4}  display={"block"} width={"100%"} component="h4" variant="h4">
-                  Orientación vocacional - Sesión
+                <Typography
+                  marginBottom={4}
+                  display={"block"}
+                  width={"100%"}
+                  component="h4"
+                  variant="h4"
+                >
+                  {oferta.TituloOferta}
                 </Typography>
-                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
-                ¿No estás seguro o segura qué carrera te conviene más? ¿Tienes demasiadas o ninguna opción de carrera?
+                <Typography
+                  fontSize={18}
+                  marginBottom={1}
+                  display={"block"}
+                  width={"100%"}
+                  component="p"
+                  variant="p"
+                >
+                  ¿No estás seguro o segura qué carrera te conviene más? ¿Tienes
+                  demasiadas o ninguna opción de carrera?
                 </Typography>
-                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
-               Vamos a trabajar en conjunto para que puedas descrubir tu vocación y elegir tu carrera
+                <Typography
+                  fontSize={18}
+                  marginBottom={1}
+                  display={"block"}
+                  width={"100%"}
+                  component="p"
+                  variant="p"
+                >
+                  Vamos a trabajar en conjunto para que puedas descrubir tu
+                  vocación y elegir tu carrera
                 </Typography>
-                <Typography fontSize={18} marginBottom={1}  display={"block"} width={"100%"} component="p" variant="p">
-               Lo haremos mediante la orientación vocacional, que es un proceso de aprendizaje que implica autoconocernos e identificar nuestros objetivos de vida. Esto nos permite identificar aquellas carreras que se adaptan mejor a nuestra forma de ser.
+                <Typography
+                  fontSize={18}
+                  marginBottom={1}
+                  display={"block"}
+                  width={"100%"}
+                  component="p"
+                  variant="p"
+                >
+                  Lo haremos mediante la orientación vocacional, que es un
+                  proceso de aprendizaje que implica autoconocernos e
+                  identificar nuestros objetivos de vida. Esto nos permite
+                  identificar aquellas carreras que se adaptan mejor a nuestra
+                  forma de ser.
                 </Typography>
-                <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ mt:5 }}>
-            <Rating name="rating-read-only" value={4} readOnly />
-            </Typography>
-            <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ my:2 }}>
-              (2100 opiniones)
-            </Typography>
-            <Typography align='center' variant="subtitle1" color="text.secondary" sx={{ mb:2 }}>
-              ESP / ING
-            </Typography>
-            <Button sx={{py:2,px:5}} size="large" variant="contained" endIcon={<EventAvailableIcon/>}>
-              Reservar turno
-            </Button>
+                <Typography
+                  align="center"
+                  variant="subtitle1"
+                  color="text.secondary"
+                  sx={{ mt: 5 }}
+                >
+                  <Rating name="rating-read-only" value={4} readOnly />
+                </Typography>
+                <Typography
+                  align="center"
+                  variant="subtitle1"
+                  color="text.secondary"
+                  sx={{ my: 2 }}
+                >
+                  {`${opiniones.length} opiniones`}
+                </Typography>
+                <Typography
+                  align="center"
+                  variant="subtitle1"
+                  color="text.secondary"
+                  sx={{ mb: 2 }}
+                >
+                  {idiomas.map((idioma,i)=>{
+                     <span>
+                        {idioma.Nombre}
+                     </span> 
+                  })}
+                </Typography>
+                <Button
+                  sx={{ py: 2, px: 5 }}
+                  size="large"
+                  variant="contained"
+                  endIcon={<EventAvailableIcon />}
+                >
+                  Reservar turno
+                </Button>
               </Box>
             </Grid>
-            <Grid item xs={4} sx={{ borderRight:1,borderTop:1,borderBottom:1, borderColor: "#e0ebeb", borderTopRightRadius:20 , borderBottomRightRadius:20}}>
+            <Grid
+              item
+              xs={4}
+              sx={{
+                borderRight: 1,
+                borderTop: 1,
+                borderBottom: 1,
+                borderColor: "#e0ebeb",
+                borderTopRightRadius: 20,
+                borderBottomRightRadius: 20,
+              }}
+            >
               <Box textAlign={"center"} spacing={2} paddingY={5}>
-                <Typography marginBottom={5}  display={"block"} width={"100%"} component="h2" variant="h5">
-                  María Soler
+                <Typography
+                  marginBottom={5}
+                  display={"block"}
+                  width={"100%"}
+                  component="h2"
+                  variant="h5"
+                >
+                  {data.oferta.NombreEmbajador}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
                   src="/static/images/avatar/1.jpg"
-                  sx={{ width: 200, height: 200, mx:"auto", my:"5"}}
+                  sx={{ width: 200, height: 200, mx: "auto", my: "5" }}
                   my={5}
-                />     
-                <Typography marginY={5} display={"block"} width={"100%"} component="h2" variant="h5">
-                  Psícologa Profesional
+                />
+                <Typography
+                  marginY={5}
+                  display={"block"}
+                  width={"100%"}
+                  component="h2"
+                  variant="h5"
+                >
+                  {data.oferta.NombreCategoria}
                 </Typography>
-                <Link href="#" onClick={handleOnClickPerfil} sx={{my:5, fontSize:20}}>
-                Ver perfil en detalle...
+                <Typography
+                  marginY={5}
+                  display={"block"}
+                  width={"100%"}
+                  component="h2"
+                  variant="h5"
+                >
+                 {`$ ${data.oferta.CostoPorHora}/hr`}
+                </Typography>
+                <Link
+                  href="#"
+                  onClick={handleOnClickPerfil}
+                  sx={{ my: 5, fontSize: 20 }}
+                >
+                  Ver perfil en detalle...
                 </Link>
               </Box>
             </Grid>
@@ -99,8 +224,8 @@ const DetalleOferta = () => {
                 width={"100%"}
               >
                 <Grid item xs={3} sx={{ mx: 2 }}>
-                  <CardActionArea sx={{width:"220px", height:"240px"}}>
-                    <Card  sx={{width:"220px", height:"240px"}}>
+                  <CardActionArea sx={{ width: "220px", height: "240px" }}>
+                    <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>
                         <Typography>Otra publicacion</Typography>
                       </CardContent>
@@ -108,8 +233,8 @@ const DetalleOferta = () => {
                   </CardActionArea>
                 </Grid>
                 <Grid item xs={3} sx={{ mx: 2 }}>
-                  <CardActionArea sx={{width:"220px", height:"240px"}}>
-                    <Card sx={{width:"220px", height:"240px"}}>
+                  <CardActionArea sx={{ width: "220px", height: "240px" }}>
+                    <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>
                         <Typography>Otra publicacion</Typography>
                       </CardContent>
@@ -117,8 +242,8 @@ const DetalleOferta = () => {
                   </CardActionArea>
                 </Grid>
                 <Grid item xs={3} sx={{ mx: 2 }}>
-                  <CardActionArea sx={{width:"220px", height:"240px"}}>
-                    <Card sx={{width:"220px", height:"240px"}}>
+                  <CardActionArea sx={{ width: "220px", height: "240px" }}>
+                    <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>
                         <Typography>Otra publicacion</Typography>
                       </CardContent>
@@ -129,8 +254,11 @@ const DetalleOferta = () => {
             </Box>
           </Stack>
         </Card>
+        
+        </>}
       </Container>
     </>
+    
   );
 };
 

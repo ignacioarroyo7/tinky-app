@@ -8,13 +8,26 @@ import Articulo from './components/Articulo';
 import Slider from './components/Slider';
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom"
+import { useQuery, useQueryClient } from 'react-query';
+import axios from 'axios';
+import { enviroment } from '../../enviroment';
+import { useState } from 'react';
 
+const useOfertas = ()=>{
+  return useQuery("ofertas",async ()=>{
+    const { data } = await axios.get(`${enviroment.urlBaseBack}/oferta`) 
+  return data
+  })
+}    
 
 const Home = () => {
 
   const navigate = useNavigate();
+ 
+        const queryClient = useQueryClient();
+        const { status, data, error, isFetching } = useOfertas()
+      // const [ofertasList,setOfertasList] = useState(data.ofertas)
 
-      
       const publicidad = {
         title: '',
         description:
@@ -33,72 +46,72 @@ const Home = () => {
         linkText: '',
       };
       
-      const featuredPosts = [
-        {
-          title: 'Psícologa Profesional',
-          date: '20 u$s por hora',
-          description:
-            'UBA -  Terapia, adultos, adolescentes, parejas',
-          image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-          imageLabel: 'Image Text',
-        },
-        {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-          {
-            title: 'Psícologa Profesional',
-            date: '20 u$s por hora',
-            description:
-              'UBA -  Terapia, adultos, adolescentes, parejas',
-            image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
-            imageLabel: 'Image Text',
-          },
-      ];
+      // const featuredPosts = [
+      //   {
+      //     title: 'Psícologa Profesional',
+      //     date: '20 u$s por hora',
+      //     description:
+      //       'UBA -  Terapia, adultos, adolescentes, parejas',
+      //     image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //     imageLabel: 'Image Text',
+      //   },
+      //   {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      //     {
+      //       title: 'Psícologa Profesional',
+      //       date: '20 u$s por hora',
+      //       description:
+      //         'UBA -  Terapia, adultos, adolescentes, parejas',
+      //       image: 'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg',
+      //       imageLabel: 'Image Text',
+      //     },
+      // ];
 
       const handleOnClickSolicitarTurno = ()=>{
         navigate('/solicitar-turno',{
@@ -121,9 +134,12 @@ const Home = () => {
         <main>
           <Publicidad post={publicidad} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post,i) => (
-              <Articulo key={i} post={post} />
-            ))}
+            {
+              isFetching?(<></>):
+              data.ofertas.map((oferta,i) => (
+              <Articulo key={i} post={oferta} />
+              ))
+            }
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
           </Grid>
