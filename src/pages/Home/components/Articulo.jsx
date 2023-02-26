@@ -12,6 +12,7 @@ const Articulo = (props)=> {
   const navigate = useNavigate();
   const handleOnClickDetalleOferta = (id)=>{
     // debugger
+    console.log("Oferta Id", id)
     navigate('/detalle-oferta',{
       replace:true,
       state: {

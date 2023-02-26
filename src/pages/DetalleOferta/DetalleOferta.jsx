@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
@@ -16,37 +16,35 @@ import { enviroment } from "../../enviroment";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 
-const useOfertaById = (ofertaId) => {
-  return useQuery("oferta", async () => {
-    const { data } = await axios.get(`${enviroment.urlBaseBack}/oferta`, {
-      params: { ofertaId },
-    });
-    return data;
-  });
-};
-
 const DetalleOferta = () => {
-  const { state } = useLocation();
-  const { ofertaId } = state;
-  const queryClient = useQueryClient();
-  const { status, data, error, isFetching } = useOfertaById(ofertaId);
-
+  const location = useLocation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+
+
   const handleOnClickPerfil = () => {
     navigate("/perfil", {
       replace: true,
     });
   };
 
-  const oferta = data.oferta
-  const idiomas = data.idiomas
-  const opiniones = data.opiniones
+  useEffect(()=> {
+    const ofertaId = location.state.ofertaId
+    console.log("Oferta en detalle de oferta",ofertaId)
+    axios.get(`${enviroment.urlBaseBack}/oferta/ofertaId`, {
+      params: { ofertaId },
+    }).then(data => {
+      console.log(data)
+    });
+    
+  },[])
+
 
   return (
 <>
       <CssBaseline />
       <Container maxWidth="lg">
-        {isFetching?<></>:<>
         <Card marginBottom={0}>
           <Grid container padding={4}>
             <Grid
@@ -68,7 +66,6 @@ const DetalleOferta = () => {
                   component="h4"
                   variant="h4"
                 >
-                  {oferta.TituloOferta}
                 </Typography>
                 <Typography
                   fontSize={18}
@@ -120,7 +117,7 @@ const DetalleOferta = () => {
                   color="text.secondary"
                   sx={{ my: 2 }}
                 >
-                  {`${opiniones.length} opiniones`}
+                  {`2 opiniones`}
                 </Typography>
                 <Typography
                   align="center"
@@ -128,11 +125,6 @@ const DetalleOferta = () => {
                   color="text.secondary"
                   sx={{ mb: 2 }}
                 >
-                  {idiomas.map((idioma,i)=>{
-                     <span>
-                        {idioma.Nombre}
-                     </span> 
-                  })}
                 </Typography>
                 <Button
                   sx={{ py: 2, px: 5 }}
@@ -164,7 +156,6 @@ const DetalleOferta = () => {
                   component="h2"
                   variant="h5"
                 >
-                  {data.oferta.NombreEmbajador}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
@@ -179,7 +170,6 @@ const DetalleOferta = () => {
                   component="h2"
                   variant="h5"
                 >
-                  {data.oferta.NombreCategoria}
                 </Typography>
                 <Typography
                   marginY={5}
@@ -188,7 +178,7 @@ const DetalleOferta = () => {
                   component="h2"
                   variant="h5"
                 >
-                 {`$ ${data.oferta.CostoPorHora}/hr`}
+                 {`$ 500/hr`}
                 </Typography>
                 <Link
                   href="#"
@@ -254,8 +244,6 @@ const DetalleOferta = () => {
             </Box>
           </Stack>
         </Card>
-        
-        </>}
       </Container>
     </>
     
