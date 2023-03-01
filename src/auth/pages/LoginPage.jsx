@@ -20,6 +20,7 @@ import axios from "axios";
 import { enviroment } from "../../enviroment";
 import { useEffect } from "react";
 import { useState } from "react";
+import useSessionStorage from "../../hooks/useSessionStorage";
 // import { AuthContext } from '../context/AuthContext'
 
 function Copyright(props) {
@@ -60,9 +61,10 @@ const theme = createTheme({
 });
 
 const LoginPage = () => {
+
   // const [urlBaseBack,setUrlBaseBack] = useState(enviroment.urlBaseBack)
   const { login, logged } = useContext(AuthContext);
-
+  const [tokenUser, setTokenUser] = useSessionStorage('token','')
 
   // useEffect(()=>{
   //     console.log(urlBaseBack+"/api/auth/login")
@@ -73,7 +75,7 @@ const LoginPage = () => {
   // const { login } = useContext( AuthContext )
   const navigate = useNavigate();
 
-  const baseURL = `${enviroment.urlBaseBack}/api/auth/login`;
+  const baseURL = `${enviroment.urlBaseBack}/auth/login`;
 
 
   const iniciarSesion = (data) => {
@@ -92,7 +94,9 @@ const LoginPage = () => {
       }
         console.log('response',response)
         console.log('response data',response.data);
+        setTokenUser(response.data.token)
       });
+
   };
 
   const handleSubmit = (event) => {

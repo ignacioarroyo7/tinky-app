@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -8,30 +8,29 @@ import Articulo from './components/Articulo';
 import Slider from './components/Slider';
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom"
-import { useQuery } from 'react-query';
 import axios from 'axios';
 import { enviroment } from '../../enviroment';
 
 
 const Home = () => {
 
+  const ofertaFetchRef = useRef(false);
 
-  
-  const useOfertas = ()=>{
-    return useQuery("ofertas", GetOfertasWithAxios) 
-  }  
-  
-  const GetOfertasWithAxios = async () => {
-  
-    const { data } = await axios.get(`${enviroment.urlBaseBack}/oferta`) 
-    return data;
-  }
-  
+  useEffect(()=> {
+    if (ofertaFetchRef.current) return;
+    ofertaFetchRef.current = true;
+
+    axios.get(`${enviroment.urlBaseBack}/oferta`
+    ).then(response => {
+      setOfertas(response.data.ofertas)
+    });
+    
+  },[])
+
+  const [ofertas, setOfertas] = useState([])
 
   const navigate = useNavigate();
  
-        const { data ,isLoading , error, isFetching } = useOfertas()
-      // const [ofertasList,setOfertasList] = useState(data.ofertas)
 
       const publicidad = {
         title: '',
@@ -56,6 +55,11 @@ const Home = () => {
           replace:true
       });
       }
+      const handleOnClickMeeting = ()=>{
+        navigate('/meeting',{
+          replace:true
+      });
+      }
 
       const handleOnClickCrearTurno = ()=>{
         navigate('/crear-turno',{
@@ -64,9 +68,9 @@ const Home = () => {
       }
      
 
-      if(isLoading) return "Loading"
+    //   if(isLoading) return "Loading"
     
-     if(error)return "An error has occurred: " + error.message;
+    //  if(error)return "An error has occurred: " + error.message;
 
     return (
         <>
@@ -78,9 +82,10 @@ const Home = () => {
           <Publicidad post={publicidad} />
           <Grid container spacing={4}>
             {
-              isFetching ?(<></>):
+              
+            !ofertas ?(<></>):
               (
-                data?.ofertas.map((oferta,i) => (
+                ofertas.map((oferta,i) => (
                   <Articulo key={i} post={oferta} />
                   ))
               ) 
@@ -89,9 +94,9 @@ const Home = () => {
           <Grid container spacing={5} sx={{ mt: 3 }}>
           </Grid>
         </main>
-        <Button onClick={()=>handleOnClickCrearTurno()}> Crear turno </Button>
-        <Button onClick={()=>handleOnClickSolicitarTurno()}> Solicitar turno </Button>
-
+        <Button onClick={()=>handleOnClickCrearTurno()}> Crear horario </Button>
+        {/* <Button onClick={()=>handleOnClickSolicitarTurno()}> Solicitar turno </Button> */}
+        <Button onClick={()=>handleOnClickMeeting()}> To meeting </Button>
       </Container>
         </>
     );

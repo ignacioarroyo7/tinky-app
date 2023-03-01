@@ -90,7 +90,7 @@ const HorarioRow = () => {
           }}
         >
           <Typography component="h1" variant="h5">
-            Crear nuevo turno
+            Crear nuevo horario
           </Typography>
           <Box component="form" 
           // onSubmit={handleSubmit}

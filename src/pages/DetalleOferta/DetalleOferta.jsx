@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
@@ -10,16 +10,23 @@ import CardContent from "@mui/material/CardContent";
 import { Button, Grid, Link } from "@mui/material";
 import { Box } from "@mui/system";
 import Rating from "@mui/material/Rating";
-import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import { useLocation, useNavigate } from "react-router-dom";
 import { enviroment } from "../../enviroment";
-import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
+import Chip from "@mui/material/Chip";
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import ModalSolicitarTurno from "./ModalSolicitarTurno";
 
-const DetalleOferta = () => {
+const DetalleOferta = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+
+  const ofertaFetchRef = useRef(false);
+  const ofertaIdRef = useRef(0);
+
+  const [oferta, setOferta] = useState({});
+  const [idiomas, setIdiomas] = useState([]);
+  const [opiniones, setOpiniones] = useState([]);
 
 
 
@@ -29,23 +36,34 @@ const DetalleOferta = () => {
     });
   };
 
-  useEffect(()=> {
-    const ofertaId = location.state.ofertaId
-    console.log("Oferta en detalle de oferta",ofertaId)
-    axios.get(`${enviroment.urlBaseBack}/oferta/ofertaId`, {
-      params: { ofertaId },
-    }).then(data => {
-      console.log(data)
-    });
-    
-  },[])
+  useEffect(() => {
+    if (ofertaFetchRef.current) return;
+    ofertaFetchRef.current = true;
 
+    const ofertaId = location.state.ofertaId;
+    ofertaIdRef.current = ofertaId
+    console.log("Oferta en detalle de oferta", ofertaId);
+    axios
+      .get(`${enviroment.urlBaseBack}/oferta/ofertaId`, {
+        params: { ofertaId },
+      })
+      .then((resp) => {
+        const ofertaResp = resp.data.oferta;
+        const idiomasResp = resp.data.idiomas;
+        const opinionesResp = resp.data.opiniones;
+
+        console.log("promedioOpiniones", ofertaResp.promedioOpiniones);
+        setOferta(ofertaResp);
+        setIdiomas(idiomasResp);
+        setOpiniones(opinionesResp);
+      });
+  }, []);
 
   return (
-<>
+    <>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Card marginBottom={0}>
+      <Container sx={{mt:1}} maxWidth="lg">
+        <Card>
           <Grid container padding={4}>
             <Grid
               item
@@ -66,6 +84,7 @@ const DetalleOferta = () => {
                   component="h4"
                   variant="h4"
                 >
+                  {oferta.TituloOferta}
                 </Typography>
                 <Typography
                   fontSize={18}
@@ -75,10 +94,9 @@ const DetalleOferta = () => {
                   component="p"
                   variant="p"
                 >
-                  ¿No estás seguro o segura qué carrera te conviene más? ¿Tienes
-                  demasiadas o ninguna opción de carrera?
+                  {oferta.DescripcionOferta}
                 </Typography>
-                <Typography
+                {/* <Typography
                   fontSize={18}
                   marginBottom={1}
                   display={"block"}
@@ -102,14 +120,17 @@ const DetalleOferta = () => {
                   identificar nuestros objetivos de vida. Esto nos permite
                   identificar aquellas carreras que se adaptan mejor a nuestra
                   forma de ser.
-                </Typography>
+                </Typography> */}
                 <Typography
                   align="center"
                   variant="subtitle1"
                   color="text.secondary"
                   sx={{ mt: 5 }}
                 >
-                  <Rating name="rating-read-only" value={4} readOnly />
+                  {opiniones.length>0?
+                  (
+                  <Rating name="rating-read-only" value={oferta.promedioOpiniones} readOnly />):(<></>)
+                  }
                 </Typography>
                 <Typography
                   align="center"
@@ -117,7 +138,7 @@ const DetalleOferta = () => {
                   color="text.secondary"
                   sx={{ my: 2 }}
                 >
-                  {`2 opiniones`}
+                  {`${opiniones.length} opiniones`}
                 </Typography>
                 <Typography
                   align="center"
@@ -125,15 +146,12 @@ const DetalleOferta = () => {
                   color="text.secondary"
                   sx={{ mb: 2 }}
                 >
+                  {idiomas.map((i,key) => {
+                    return <Chip sx={{mr:1}} label={i.Nombre} key={key} color="primary" variant="outlined"/>
+                    // console.log(i.Nombre)
+                  })}
                 </Typography>
-                <Button
-                  sx={{ py: 2, px: 5 }}
-                  size="large"
-                  variant="contained"
-                  endIcon={<EventAvailableIcon />}
-                >
-                  Reservar turno
-                </Button>
+                <ModalSolicitarTurno ofertaId={ofertaIdRef.current}/>
               </Box>
             </Grid>
             <Grid
@@ -156,6 +174,8 @@ const DetalleOferta = () => {
                   component="h2"
                   variant="h5"
                 >
+                  {" "}
+                  {oferta.NombreEmbajador}
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
@@ -169,8 +189,7 @@ const DetalleOferta = () => {
                   width={"100%"}
                   component="h2"
                   variant="h5"
-                >
-                </Typography>
+                ></Typography>
                 <Typography
                   marginY={5}
                   display={"block"}
@@ -178,7 +197,7 @@ const DetalleOferta = () => {
                   component="h2"
                   variant="h5"
                 >
-                 {`$ 500/hr`}
+                  {`$ ${oferta.CostoPorHora} / hr`}
                 </Typography>
                 <Link
                   href="#"
@@ -205,7 +224,7 @@ const DetalleOferta = () => {
               justifyContent="center"
             >
               <Typography marginBottom={5} marginLeft={5} variant="h5">
-                Otras publicaciones del mismo profesional
+                Otras publicaciones que quizás puedan interesarte... <Chip sx={{mr:1}} icon={<LocalOfferIcon/>} label={oferta.NombreCategoria} color="primary" variant="outlined"/>
               </Typography>
               <Grid
                 direction="row"
@@ -246,7 +265,6 @@ const DetalleOferta = () => {
         </Card>
       </Container>
     </>
-    
   );
 };
 

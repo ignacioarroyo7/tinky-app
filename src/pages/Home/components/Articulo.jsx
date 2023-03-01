@@ -12,8 +12,8 @@ const Articulo = (props)=> {
   const navigate = useNavigate();
   const handleOnClickDetalleOferta = (id)=>{
     // debugger
-    console.log("Oferta Id", id)
-    navigate('/detalle-oferta',{
+    console.log("Oferta Id seleccionado", id)
+    navigate(`/detalle-oferta`,{
       replace:true,
       state: {
         ofertaId:id

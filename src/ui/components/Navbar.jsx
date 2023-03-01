@@ -18,12 +18,13 @@ import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../auth/context/AuthContext';
+import useSessionStorage from '../../hooks/useSessionStorage';
 
 const Navbar = () => {
 
 
   const {logged, logout} = useContext(AuthContext)
-
+  const [tokenUser, setTokenUser] = useSessionStorage('token','')
 
     const navigate = useNavigate();
 
@@ -58,12 +59,13 @@ const Navbar = () => {
 
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
-        setUserAuth(false)
+        // setUserAuth(false)
         //console.log('Logout')
       };
       const handleOnClickLogout = ()=>{
         console.log('logouttttttt')
         logout()
+        setUserAuth(false)
         navigate('/',{
           replace:true
       });

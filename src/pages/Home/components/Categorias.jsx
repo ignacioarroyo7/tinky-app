@@ -22,20 +22,17 @@ const sections = [
 
 const Categorias = () => {
 
-
-
-
     return (
         <>
       <Toolbar
         component="nav"
         variant="dense"
-        sx={{ my:4, justifyContent: 'space-between', overflowX: 'auto' }}
+        sx={{ my:4, justifyContent: 'center', overflowX: 'auto' }}
       >
         {sections.map((section,i) => (
           <div key={i}>
       <CardActionArea>
-      <Card sx={{ display: 'flex' }}>
+      <Card sx={{ display: 'flex' , width:200, mr:2}}>
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box>
@@ -62,8 +59,6 @@ const Categorias = () => {
       </CardContent>
       </Card>
       </CardActionArea>
-        
-          
           </div>
         ))}
       </Toolbar>
