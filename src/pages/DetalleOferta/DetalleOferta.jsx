@@ -67,13 +67,16 @@ const DetalleOferta = (props) => {
           <Grid container padding={4}>
             <Grid
               item
-              xs={8}
+              xs={12}
+              md={6}
               sx={{
                 m: 0,
                 border: 1,
                 borderColor: "#e0ebeb",
                 borderTopLeftRadius: 20,
                 borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                borderTopRightRadius: 20,
               }}
             >
               <Box textAlign={"center"} spacing={2} paddingY={5} paddingX={3}>
@@ -156,14 +159,18 @@ const DetalleOferta = (props) => {
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={12}
+              md={6}
               sx={{
                 borderRight: 1,
+                borderLeft: 1,
                 borderTop: 1,
                 borderBottom: 1,
                 borderColor: "#e0ebeb",
                 borderTopRightRadius: 20,
                 borderBottomRightRadius: 20,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 20,
               }}
             >
               <Box textAlign={"center"} spacing={2} paddingY={5}>
@@ -232,7 +239,7 @@ const DetalleOferta = (props) => {
                 container
                 width={"100%"}
               >
-                <Grid item xs={3} sx={{ mx: 2 }}>
+                <Grid item mt={1}  xs={12} sm={5} md={4} lg={3} xl={3} sx={{ mx: 2 }}>
                   <CardActionArea sx={{ width: "220px", height: "240px" }}>
                     <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>
@@ -241,7 +248,7 @@ const DetalleOferta = (props) => {
                     </Card>
                   </CardActionArea>
                 </Grid>
-                <Grid item xs={3} sx={{ mx: 2 }}>
+                <Grid item  mt={1} xs={12} sm={5} md={4} lg={3} xl={3}  sx={{ mx: 2 }}>
                   <CardActionArea sx={{ width: "220px", height: "240px" }}>
                     <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>
@@ -250,7 +257,7 @@ const DetalleOferta = (props) => {
                     </Card>
                   </CardActionArea>
                 </Grid>
-                <Grid item xs={3} sx={{ mx: 2 }}>
+                <Grid item mt={1} xs={12} sm={5} md={4} lg={3} xl={3}  sx={{ mx: 2 }}>
                   <CardActionArea sx={{ width: "220px", height: "240px" }}>
                     <Card sx={{ width: "220px", height: "240px" }}>
                       <CardContent>

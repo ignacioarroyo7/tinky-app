@@ -6,7 +6,7 @@ import Categorias from './components/Categorias';
 import Publicidad from './components/Publicidad';
 import Articulo from './components/Articulo';
 import Slider from './components/Slider';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { enviroment } from '../../enviroment';
@@ -75,7 +75,7 @@ const Home = () => {
     return (
         <>
         <CssBaseline />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
       <Slider post={slider} />
         <Categorias title="Blog"/>
         <main>

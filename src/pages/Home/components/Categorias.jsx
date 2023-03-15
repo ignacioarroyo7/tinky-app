@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -24,15 +23,15 @@ const Categorias = () => {
 
     return (
         <>
-      <Toolbar
+              <Toolbar
         component="nav"
         variant="dense"
-        sx={{ my:4, justifyContent: 'center', overflowX: 'auto' }}
+        sx={{ my:4, justifyContent: 'space-between', overflowX: 'auto' }}
       >
         {sections.map((section,i) => (
           <div key={i}>
       <CardActionArea>
-      <Card sx={{ display: 'flex' , width:200, mr:2}}>
+      <Card sx={{ display: 'flex' , width:200, mx:'auto'}}>
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box>
