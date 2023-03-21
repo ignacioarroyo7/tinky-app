@@ -31,17 +31,28 @@ const Swal = require('sweetalert2')
     const [fecha, setFecha] = useState(null)
     const [horarioSeleccionado, setHorarioSeleccionado] = useState()
     const [horariosDisponiblesList, setHorariosList] = useState([])
-
-    // useEffect(()=>{
-
-    // })
+    const [turnoId,setTurnoId] = useState(null)
+    useEffect(()=>{
+      console.log('props',props);
+    },[])
 
 
     const handleClickOpen = () => {
       setOpen(true);
     };
   
-    
+    const crearLinkDePago = (turnoIdParam)=>{
+      const body = { titulo:props.texto, precio:props.precio ,turnoId:turnoIdParam}
+      axios
+      .post(`${enviroment.urlPythonMP}/generateLinkMP`, body)
+      .then((response) => {
+        if(response){
+        console.log('response generateLinkMP',response)
+        console.log('response.url',response.data.url)
+        window.open(response.data.url)
+      }
+      });
+    }
 
     const handleHorarioSeleccionado = (e) => {
       console.log('e in handleHorarioSeleccionado',e.target.value)
@@ -78,13 +89,15 @@ const Swal = require('sweetalert2')
       const {data} = response
       console.log('data in postReservarTurno',data)
       if(response.status==200){
+        const turnoIdResp = data.meetingId
         handleClose()
-        Swal.fire({
-          title: 'Reserva',
-          text: 'Turno reservado con éxito',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        })
+        crearLinkDePago(turnoIdResp)
+        // Swal.fire({
+        //   title: 'Reserva',
+        //   text: 'Turno reservado con éxito',
+        //   icon: 'success',
+        //   confirmButtonText: 'Ok'
+        // })
       }
     })
   }

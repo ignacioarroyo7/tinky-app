@@ -27,6 +27,8 @@ const DetalleOferta = (props) => {
   const [oferta, setOferta] = useState({});
   const [idiomas, setIdiomas] = useState([]);
   const [opiniones, setOpiniones] = useState([]);
+  const [textoProps,setTextoProps] = useState('')
+  const [precioProps,setPrecioProps] = useState(null)
 
 
 
@@ -48,14 +50,19 @@ const DetalleOferta = (props) => {
         params: { ofertaId },
       })
       .then((resp) => {
+        const precioOferta = resp.data.oferta.CostoPorHora;
+        const textoOferta = resp.data.oferta.TituloOferta;
+        console.log(precioOferta);
+        console.log(textoOferta);
+
         const ofertaResp = resp.data.oferta;
         const idiomasResp = resp.data.idiomas;
         const opinionesResp = resp.data.opiniones;
-
-        console.log("promedioOpiniones", ofertaResp.promedioOpiniones);
         setOferta(ofertaResp);
         setIdiomas(idiomasResp);
         setOpiniones(opinionesResp);
+        setPrecioProps(precioOferta);
+        setTextoProps(textoOferta);
       });
   }, []);
 
@@ -154,7 +161,14 @@ const DetalleOferta = (props) => {
                     // console.log(i.Nombre)
                   })}
                 </Typography>
-                <ModalSolicitarTurno ofertaId={ofertaIdRef.current}/>
+                {textoProps!=''&&precioProps!=null?
+                (
+                  <ModalSolicitarTurno texto={textoProps} precio={precioProps} ofertaId={ofertaIdRef.current}/>
+                )
+                :
+                (
+                  <></>
+                )}
               </Box>
             </Grid>
             <Grid
