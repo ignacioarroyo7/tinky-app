@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useState } from "react";
+import { enviroment } from "../../../enviroment";
 
 
 function Copyright(props) {
@@ -37,7 +38,7 @@ function Copyright(props) {
 const RegisterCliente = () => {
   const navigate = useNavigate();
 
-  const baseURL = "https://8a14-181-94-58-51.ngrok.io/api/cliente/create";
+  const baseURL = `${enviroment.urlBaseBack}/cliente/create`;
 
 const singUpCliente =(data)=> {
     axios

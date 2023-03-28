@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -25,13 +25,18 @@ const Navbar = () => {
 
   const {logged, logout} = useContext(AuthContext)
   const [tokenUser, setTokenUser] = useSessionStorage('token','')
-
-    const navigate = useNavigate();
-
-      const [anchorElNav, setAnchorElNav] = useState(null);
-      const [anchorElUser, setAnchorElUser] = useState(null);
-      const [userAuth,setUserAuth]= useState(logged)
+  
+  const navigate = useNavigate();
+  
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [userAuth,setUserAuth]= useState(logged)
+  const [isClient,setIsClient] = useState(false)
     
+  useEffect(()=>{
+    console.log('sessionStorage.getItem("client")',sessionStorage.getItem("client"))
+    setIsClient(sessionStorage.getItem("client"))
+  },[])
       const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
@@ -48,6 +53,12 @@ const Navbar = () => {
           replace:true
       });
       };
+      const handleOnClickCrearOferta = ()=>{
+        setAnchorElNav(null);
+        navigate('/crear-oferta',{
+          replace:true
+      });
+      }
       
       // const handleOnClickPerfil = ()=>{
       //   console.log('in perfil')
@@ -66,6 +77,7 @@ const Navbar = () => {
         console.log('logouttttttt')
         logout()
         setUserAuth(false)
+        sessionStorage.clear()
         navigate('/',{
           replace:true
       });
@@ -193,6 +205,12 @@ const [palabraBusqueda,setPalabraBusqueda] = useState('')
                   <MenuItem key={1} onClick={handleOnClickServicios}>
                       <Typography textAlign="center">Servicios</Typography>
                     </MenuItem>
+                    {/* {isClient?<></>:<>
+                      <MenuItem
+                       key={1} onClick={handleOnClickCrearOferta}>
+                      <Typography textAlign="center">Crear oferta</Typography>
+                    </MenuItem>
+                    </>} */}
                     {/* <MenuItem key={1} onClick={handleOnClickPerfil}>
                       <Typography textAlign="center">Mi Perfil</Typography>
                     </MenuItem> */}
@@ -234,6 +252,17 @@ const [palabraBusqueda,setPalabraBusqueda] = useState('')
                   >
                     Servicios
                   </Button>
+                  {isClient===false?
+                  <Button
+                  key={1}
+                  onClick={handleOnClickCrearOferta}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Crear oferta
+                </Button>
+                  :<></>
+                  }
+                  
                   {/* <Button
                     key={2}
                     onClick={handleOnClickPerfil}

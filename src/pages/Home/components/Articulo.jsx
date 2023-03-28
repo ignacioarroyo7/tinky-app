@@ -43,8 +43,9 @@ const Articulo = (props)=> {
           <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg'}
-            alt={'Image Text'}
+            // image={'https://www.shutterstock.com/image-photo/geriatric-psychology-mental-therapy-old-260nw-1433830370.jpg'}
+            alt={`Imagen ${post.TituloOferta} de ${post.NombreEmbajador}`}
+            src={post.Imagen==null?'https://img.freepik.com/premium-vector/system-software-update-upgrade-concept-loading-process-screen-vector-illustration_175838-2182.jpg?w=2000':post.Imagen}
           />
         </Card>
       </CardActionArea>

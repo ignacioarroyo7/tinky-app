@@ -9,6 +9,7 @@ import SolicitarTurno from "../pages/Turno/SolicitarTurno"
 import CrearTurno from "../pages/Turno/CrearTurno"
 import DetalleOferta from "../pages/DetalleOferta/DetalleOferta"
 import Meeting from "../pages/Meeting/Meeting"
+import LoginEmbajador from "../auth/pages/LoginEmbajadorPage"
 
 
 export const AppRouter = () =>{
@@ -25,9 +26,10 @@ export const AppRouter = () =>{
         <Route path="/search" element={<BusquedaPage/>} />
         <Route path="/perfil" element={<Perfil/>}/>
         <Route path= "/solicitar-turno" element={<SolicitarTurno/>}/>
-        <Route path= "/crear-turno" element={<CrearTurno/>}/>
+        <Route path= "/crear-oferta" element={<CrearTurno/>}/>
         <Route path= "/detalle-oferta" element={<DetalleOferta/>}/>
         <Route path= "/meeting" element={<Meeting/>}/>
+        <Route path= "/login-embajador" element={<LoginEmbajador/>}/>
         <Route path="/" element={<Navigate to="/"/>}/>
         <Route/>
     </Routes>

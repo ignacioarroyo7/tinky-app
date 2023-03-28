@@ -28,7 +28,11 @@ const Home = () => {
   },[])
 
   const [ofertas, setOfertas] = useState([])
-
+  const [isClient,setIsClient] = useState(true)
+  useEffect(()=>{
+    console.log('sessionStorage.getItem("client")',sessionStorage.getItem("client"))
+    setIsClient(sessionStorage.getItem("client"))
+  },[])
   const navigate = useNavigate();
  
 
@@ -62,7 +66,7 @@ const Home = () => {
       }
 
       const handleOnClickCrearTurno = ()=>{
-        navigate('/crear-turno',{
+        navigate('/crear-oferta',{
           replace:true
       });
       }
@@ -94,7 +98,14 @@ const Home = () => {
           <Grid container spacing={5} sx={{ mt: 3 }}>
           </Grid>
         </main>
-        <Button onClick={()=>handleOnClickCrearTurno()}> Crear horario </Button>
+        {/* {
+          isClient===true?
+        <Button onClick={()=>handleOnClickCrearTurno()}> Crear oferta </Button>
+        :
+          null
+        } */}
+        <Button onClick={()=>handleOnClickCrearTurno()}> Crear oferta </Button>
+
         {/* <Button onClick={()=>handleOnClickSolicitarTurno()}> Solicitar turno </Button> */}
         <Button onClick={()=>handleOnClickMeeting()}> To meeting </Button>
       </Container>

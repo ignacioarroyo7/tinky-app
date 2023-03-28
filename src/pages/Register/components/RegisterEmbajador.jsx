@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { enviroment } from "../../../enviroment";
+
 // import { useState } from "react";
 
 // import PhoneInput from 'react-phone-input-2'
@@ -38,7 +40,7 @@ function Copyright(props) {
 const RegisterEmbajador = () => {
   // const [valuePhone,setValuePhone] = useState('')
   const navigate = useNavigate();
-  const baseURL = "https://8a14-181-94-58-51.ngrok.io/api/embajador/create";
+  const baseURL = `${enviroment.urlBaseBack}/embajador/create`;
     //const [nombre,setNombre]=useState('')
     // const [apellido,setApellido]=useState('')
     // const [email,setEmail]=useState('')

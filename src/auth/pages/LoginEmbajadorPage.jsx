@@ -60,13 +60,12 @@ const theme = createTheme({
     },
 });
 
-const LoginPage = () => {
+const LoginEmbajador = () => {
 
   // const [urlBaseBack,setUrlBaseBack] = useState(enviroment.urlBaseBack)
   const { login, logged } = useContext(AuthContext);
   const [tokenUser, setTokenUser] = useSessionStorage('token','')
-  // const [userIsCliente, setUserIsClient] = useSessionStorage('client','')
-
+  const [userIsCliente, setUserIsClient] = useSessionStorage('client','')
 
   // useEffect(()=>{
   //     console.log(urlBaseBack+"/api/auth/login")
@@ -85,7 +84,7 @@ const LoginPage = () => {
       .post(baseURL, {
         "email": data.email,
         "password": data.password,
-        "isCliente": true
+        "isCliente": false
       })
       .then((response) => {
         if(response.status===200){
@@ -97,7 +96,7 @@ const LoginPage = () => {
         console.log('response',response)
         console.log('response data',response.data);
         setTokenUser(response.data.token)
-        // setUserIsClient(true)
+        setUserIsClient(false)
       });
 
   };
@@ -130,9 +129,9 @@ const LoginPage = () => {
       replace: true,
     });
   };
-  const toLoginEmbajador = (event)=>{
+  const toLoginCliente = (event)=>{
     event.preventDefault();
-    navigate("/login-embajador", {
+    navigate("/login", {
       replace: true,
     });
   }
@@ -196,8 +195,8 @@ const LoginPage = () => {
               </Button>
               <Grid container sx={{ mb: 2 }}>
                 <Grid item xs>
-                  <Link href="#" onClick={toLoginEmbajador} variant="body2">
-                    Ingresar como embajador
+                  <Link href="#" onClick={toLoginCliente} variant="body2">
+                    Ingresar como cliente
                   </Link>
                 </Grid>
               </Grid>
@@ -221,4 +220,4 @@ const LoginPage = () => {
     </>
   );
 };
-export default LoginPage;
+export default LoginEmbajador;

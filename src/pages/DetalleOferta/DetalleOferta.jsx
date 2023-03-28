@@ -200,7 +200,7 @@ const DetalleOferta = (props) => {
                 </Typography>
                 <Avatar
                   alt="Remy Sharp"
-                  src="/static/images/avatar/1.jpg"
+                  src={oferta.Imagen==null?'https://img.freepik.com/premium-vector/system-software-update-upgrade-concept-loading-process-screen-vector-illustration_175838-2182.jpg?w=2000':oferta.Imagen}
                   sx={{ width: 200, height: 200, mx: "auto", my: "5" }}
                   my={5}
                 />
