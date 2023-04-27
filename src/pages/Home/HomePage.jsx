@@ -79,6 +79,8 @@ const Home = () => {
     return (
         <>
         <CssBaseline />
+        <div>
+
       <Container maxWidth="xl">
       <Slider post={slider} />
         <Categorias title="Blog"/>
@@ -109,6 +111,8 @@ const Home = () => {
         {/* <Button onClick={()=>handleOnClickSolicitarTurno()}> Solicitar turno </Button> */}
         <Button onClick={()=>handleOnClickMeeting()}> To meeting </Button>
       </Container>
+      </div>
+
         </>
     );
 };
