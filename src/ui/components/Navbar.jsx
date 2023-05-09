@@ -162,6 +162,7 @@ const [palabraBusqueda,setPalabraBusqueda] = useState('')
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
+                  width:'100%'
                 }}
               >
                 Tinky
@@ -231,6 +232,7 @@ const [palabraBusqueda,setPalabraBusqueda] = useState('')
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
+                  width:'100%'
                 }}
               >
                 Tinky
